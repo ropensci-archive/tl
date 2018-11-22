@@ -1,4 +1,9 @@
 dr <- function(fun, namespace = NULL){
+
+  # deparse the function & namespace
+  fun <- deparse(substitute(fun))
+  namespace <- deparse(substitute(namespace))
+
   warn = FALSE
   # if namespace == NULL & !grep("::", fun) search path
 
@@ -18,8 +23,11 @@ dr <- function(fun, namespace = NULL){
   }
 
   # Error -
+  if(!grepl("::", fun) & namespace == "NULL") {
+    stop("No namespace provided")
+  }
 
-  query(f, ns, warn)
+  # query(f, ns, warn)
 }
 
 query <- function(f, ns, warn = FALSE){
