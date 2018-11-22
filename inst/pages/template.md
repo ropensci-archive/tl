@@ -1,8 +1,11 @@
-namespace::function
+# namespace::function
 
-Description
+description
 
-- howto 1
+- howto 1  
+`command`
+
+- howto 2  
 `command`
 
 
