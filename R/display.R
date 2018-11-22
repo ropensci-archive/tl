@@ -1,9 +1,6 @@
 # display a page, encoded as a length-one character vector
 display  <- function (page) {
 
-  # collapse the page into a single vector
-  string <- paste(page, "", collapse = "\n")
-
   # what type of help do we want
   type <- getOption("help_type")
   if (is.null(type)) {
@@ -22,9 +19,10 @@ display  <- function (page) {
 
 # display in the terminal
 display_text <- function (page) {
-  message(string)
+  message(page)
 }
 
+#' @importFrom utils browseURL
 # convert to html and display in the viewer
 display_html <- function (page) {
 
@@ -55,6 +53,6 @@ display_html <- function (page) {
   rmarkdown::pandoc_convert(md_file, to = "html", output = html_file)
 
   # display the html in the browser
-  browseURL(url = html_file, browser = browser)
+  utils::browseURL(url = html_file, browser = browser)
 
 }
