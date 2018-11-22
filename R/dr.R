@@ -30,4 +30,7 @@ dr <- function(fun, namespace = NULL){
   page <- get_page(ns, f)
   display(page)
 
+  # return the page text, but don't print it
+  invisible(page)
+
 }
