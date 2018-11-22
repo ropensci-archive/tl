@@ -17,8 +17,10 @@ devtools::install_github("ropenscilabs/tl")
 Example
 -------
 
-This is a basic example which shows you how to use tl:
+Here are some basic examples of how to use tl:
 
 ``` r
-tl:::dr(lm)
+tl:::dr(stats::lm)
+
+tl::dr(plot, graphics)
 ```
