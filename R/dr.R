@@ -17,9 +17,9 @@ dr <- function(fun, namespace = NULL){
     #if !is.null(namespace) warn
   if(grepl("::", fun)) {
     if(!is.null(namespace)) warn = TRUE
-    x <- strsplit(fun, "::")
-    f <- x[[1]]
-    ns <- x[[2]]
+    x <- strsplit(fun, "::")[[1]]
+    ns <- x[1]
+    f <- x[2]
   }
 
   # Error -
