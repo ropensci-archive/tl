@@ -1,5 +1,5 @@
 # display a page, encoded as a length-one character vector
-display  <- function (page) {
+display  <- function(page) {
 
   # what type of help do we want
   type <- getOption("help_type")
@@ -18,29 +18,28 @@ display  <- function (page) {
 }
 
 # display in the terminal
-display_text <- function (page) {
+display_text <- function(page) {
   message(page)
 }
 
 #' @importFrom utils browseURL
 # convert to html and display in the viewer
-display_html <- function (page) {
-
+display_html <- function(page) {
 
   browser <- getOption("viewer")
 
   if (is.null(browser)) {
 
     # if the browser seems broken, produce a warning and use text instead
-    warning( "To display html help files (your default option) you",
-             "need to specify a default viewer. Try changing your",
-             "viewer via options. Printing to console instead")
+    warning("To display html help files (your default option) you",
+            "need to specify a default viewer. Try changing your",
+            "viewer via options. Printing to console instead")
 
     display_text(page)
 
   }
 
-  # otherwise continue with hrml display
+  # otherwise continue with html display
 
   # temporary files to store the markdown input and html output
   md_file <- tempfile(fileext = ".md")
