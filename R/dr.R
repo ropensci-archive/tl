@@ -48,7 +48,22 @@ dr <- function(fun, namespace = NULL){
     stop("No namespace provided")
   }
 
-  page <- get_page(ns, f)
+  # try to get a page
+  tryCatch(
+
+    expr = {
+      page <- get_page(ns, f)
+    },
+
+    # if it errors, give the user a message and quit the function
+    error = function(e) {
+      page_not_available(ns, f)
+      return (invisible(NULL))
+    }
+
+  )
+
+  # otherwise, go ahead and display the page
   display(page)
 
   # return the page text, but don't print it

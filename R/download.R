@@ -5,8 +5,10 @@ get_page <- function (namespace, fun) {
   base_url <- "https://raw.githubusercontent.com/ropenscilabs/tl/master/inst/pages/"
   url <- paste0(base_url, "/", namespace, "/", fun, ".md")
 
-  # download the page into a character vector (one element per line)
-  lines <- readLines(url)
+  # quietly try to download the page into a character vector (one element per line)
+  suppressWarnings(
+    lines <- readLines(url)
+  )
 
   # collapse the page into a single vector
   page <- paste(lines, collapse = "\n")
