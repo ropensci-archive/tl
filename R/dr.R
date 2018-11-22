@@ -1,3 +1,24 @@
+
+#' @title View a Quick Reference Page
+#'
+#' @description download and display a simple quick reference page for a
+#'   function
+#'
+#' @param fun the function
+#' @param namespace the package the function is in
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # pull up the quick-reference guide for the first function in dplyr
+#' tl::dr(dplyr::first)
+#'
+#' # you can also call it in one of these ways!
+#' tl::dr(first, dplyr)
+#' tl::dr("dplyr::first")
+#' tl::dr("first", "dplyr")
+#' }
 dr <- function(fun, namespace = NULL){
 
   # deparse the function & namespace
