@@ -18,6 +18,7 @@ nothing
 Function to create template rmd file pre-populated with sections to fill out.
 }
 \examples{
+\dontrun{
 create_page(dplyr::first)
-
+}
 }

@@ -9,8 +9,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_page(dplyr::first)
-#'
+#' }
 create_page <- function (fun, namespace = NULL) {
 
   # 1. open new rmd file
@@ -56,7 +57,10 @@ create_page <- function (fun, namespace = NULL) {
 
   }
 
-  if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+  # silently find out whether we have the rstudioapi package
+  have_rstudioapi <- requireNamespace("rstudioapi", quietly = TRUE)
+
+  if (have_rstudioapi && rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
     rstudioapi::navigateToFile(file)
   } else {
     utils::file.edit(file)
