@@ -19,7 +19,7 @@ display  <- function(page) {
 
 # display in the terminal
 display_text <- function(page) {
-  message(page)
+  message(format_text(page))
 }
 
 #' @importFrom utils browseURL
@@ -54,4 +54,18 @@ display_html <- function(page) {
   # display the html in the browser
   utils::browseURL(url = html_file, browser = browser)
 
+}
+
+#' Format Text Output
+#'
+#' Formats the document page output for nice display in the console
+#'
+#' @param page the text stream from the document page
+#'
+#' @return a text formatted version of the document page
+format_text <- function(page) {
+  tmp <- gsub("`", "  ", page)
+  formatted_page <- gsub("# |#", "", tmp)
+
+  formatted_page
 }
