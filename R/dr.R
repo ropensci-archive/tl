@@ -27,10 +27,7 @@ dr <- function(fun, namespace = NULL){
     stop("No namespace provided")
   }
 
-  # query(f, ns, warn)
-}
+  page <- get_page(ns, f)
+  display(page)
 
-query <- function(f, ns, warn = FALSE){
-  #searches ns for f, prints.
-  print()
 }
