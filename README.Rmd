@@ -11,13 +11,22 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+options(help_type = "text")
 ```
 # tl
 
 [![Travis build status](https://travis-ci.org/ropenscilabs/tl.svg?branch=master)](https://travis-ci.org/ropenscilabs/tl)
 [![Codecov test coverage](https://codecov.io/gh/ropenscilabs/tl/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/tl?branch=master)
 
-The goal of tl is to provide an R equivalent to the tldr command line tool, a community-contributed set of quick reference guides for R functions.
+The goal of tl is to provide an R equivalent to the tldr command line tool, a community-contributed set of quick reference guides for R functions. 
+
+> "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away" - Antoine de Saint-Exupéry
+
+Briefly forgotten how a function works? 
+Don't want to scroll through a long help file to find the example usage? 
+You need tl;dr!
+
 
 ## Installation
 
@@ -27,13 +36,29 @@ You can install the current version of tl from [github](https://github.com) with
 devtools::install_github("ropenscilabs/tl")
 ```
 
-## Example
+## Examples
 
 Here are some basic examples of how to use tl:
 
-```{r example, eval=FALSE}
-tl:::dr(stats::lm)
+Use the `dr` function to find a help page
 
-tl::dr(plot, graphics)
+```{r example, eval=TRUE}
+tl:::dr(lm)
+
+tl::dr(tidyr::gather)
+```
+
+Page you are looking for does not exist?
+Use the `create_page` function to make one! Please follow the instructions to keep it brief.
+
+```{r example2, eval=FALSE}
+tl::create_page(base::system.file)
+```
+
+Want to submit your new page to the `tl` package?
+Use the `submit_page` function to get instructions on how to add your help page to `tl`
+
+```{r example3, eval=FALSE}
+tl::submit_page(base::system.file)
 ```
 
