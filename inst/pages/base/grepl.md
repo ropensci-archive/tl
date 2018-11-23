@@ -1,6 +1,6 @@
 # base::grepl
 
-pattern Matching and Replacement
+pattern matching and replacement
 
 - find a pattern in a string  
 `grepl("pattern", string)`
