@@ -13,5 +13,6 @@ Imports:
 Suggests: 
     testthat,
     rstudioapi,
-    covr
+    covr,
+    lintr
 RoxygenNote: 6.1.1
