@@ -2,4 +2,5 @@
 
 export(create_page)
 export(dr)
+export(submit_page)
 importFrom(utils,browseURL)

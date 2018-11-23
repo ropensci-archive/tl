@@ -8,9 +8,9 @@
 #' @return a message
 page_not_available <- function (namespace, fun) {
 
-  msg <- sprintf(paste0("We don't have a page for %s::%s yet. ",
-                        "You can make one by using create_page()"),
-                 namespace, fun)
+  name <- paste0(namespace, "::", fun)
+  msg <- paste0("We don't have a page for ", name," yet.\n",
+                "You can make one by using tl::create_page(", name, ")")
   message(msg)
 
 }

@@ -24,6 +24,8 @@ dr <- function(fun, namespace = NULL) {
   # deparse the function & namespace
   fun <- deparse(substitute(fun))
   namespace <- deparse(substitute(namespace))
+  fun <- gsub("\"|\'", "", fun)
+  namespace <- gsub("\"|\'", "", namespace)
 
   # if namespace == NULL & !grep("::", fun) search path
   if (namespace == "NULL" & !grepl("::", fun)) {

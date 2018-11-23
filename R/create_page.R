@@ -52,13 +52,10 @@ create_page <- function (fun, namespace = NULL) {
     file.copy(template_path, file, overwrite = FALSE) #this could be amended to recieve input from console
 
     template <- readLines(file)
-    template[1] <- paste0(ns, "::", f)
+    template[1] <- paste0("# ", ns, "::", f)
     writeLines(template, file)
 
   }
-
-  # silently find out whether we have the rstudioapi package
-  have_rstudioapi <- requireNamespace("rstudioapi", quietly = TRUE)
 
   testing <-  identical(Sys.getenv("TESTTHAT"), "true")
 
@@ -66,16 +63,8 @@ create_page <- function (fun, namespace = NULL) {
   if (!interactive() || testing) {
     message("File created", file)
   } else {
-
-    # if user is in RStudio, create a .md file im, else open an external text editor
-    if (have_rstudioapi && rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
-    rstudioapi::navigateToFile(file)
-  } else {
-    utils::file.edit(file)
+    open_editor(file)
   }
-
-}
-
 
   # example template
   # # packageName::functionName
@@ -88,11 +77,26 @@ create_page <- function (fun, namespace = NULL) {
   # - do a different example thing
   # `code for 2nd example`
 
-
-
   # 2. print some brief rules/instructions to the terminal
-  message("Rules for making a new page:
-          1. Keep your description brief
-          2. Your whole page cannot be longer than 30 lines")
+  msg <- paste0("Rules for making a new page:\n",
+          "  1. Keep your description brief\n",
+          "  2. Your whole page cannot be longer than 30 lines\n",
+          "then you can upload it using tl::submit_page(",
+          ns, "::", f, ")")
 
+  message(msg)
+
+}
+
+open_editor <- function (file) {
+
+  # silently find out whether we have the rstudioapi package
+  have_rstudioapi <- requireNamespace("rstudioapi", quietly = TRUE)
+
+  # if user is in RStudio, create a .md file im, else open an external text editor
+  if (have_rstudioapi && rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+    rstudioapi::navigateToFile(file)
+  } else {
+    utils::file.edit(file)
+  }
 }
