@@ -1,4 +1,13 @@
-# fetch the page from the online repository as a character vector of length one
+#' Get Page
+#'
+#' Fetch the page from the online repository as a character vector of length one.
+#' If the online repository cannot be reached the function returns from the local
+#' install of the package.
+#'
+#' @param namespace the package the function exists within
+#' @param fun the function to return documenation for
+#'
+#' @return a page for presenation
 get_page <- function (namespace, fun) {
 
   # if we can access the repo
@@ -30,7 +39,11 @@ get_page <- function (namespace, fun) {
 
 }
 
-# check if we can access the repo (we have internet and the repo isn't down)
+#' Check Availability of TL::DR Repo
+#'
+#' Check if we can access the repo (we have internet and the repo isn't down)
+#'
+#' @return boolean
 can_access_repo <- function () {
 
   # hardcoded URL to a file we know should be there
@@ -57,14 +70,20 @@ can_access_repo <- function () {
 
 }
 
-# let the user know we're using the cache
+#' Using Cache
+#'
+#' Advising the user that they're using a cached version of the documenation.
+#'
+#' Let the user know we're using the cache
+#'
+#' @return prints a message
 notify_using_cache <- function () {
 
   # see how long ago the user installed the package
   install_age <- as.numeric(Sys.Date() - date_tl_installed())
 
   # basic message
-  msg <- paste0("Could not connect to the online repository of tl:dr pages, ",
+  msg <- paste0("Could not connect to the online repository of tl::dr pages, ",
                 "so using the page versions from the last time you installed ",
                 "the tl package, ")
 
@@ -92,7 +111,11 @@ notify_using_cache <- function () {
 
 }
 
-# on what date was tl last installed on this system?
+#' Date Package Installed
+#'
+#' On what date was tl last installed on this system?
+#'
+#' @return a date
 date_tl_installed <- function() {
   file <- system.file("pages", package = "tl")
   info <- file.info(file)

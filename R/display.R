@@ -1,4 +1,11 @@
-# display a page, encoded as a length-one character vector
+#' Display Page Documentation
+
+#' Display a page, encoded as a length-one character vector
+#'
+#' @param page
+#'
+#' @return a message to the user in the console or viewer pane depending on
+#'   user options
 display  <- function(page) {
 
   # what type of help do we want
@@ -17,13 +24,26 @@ display  <- function(page) {
 
 }
 
-# display in the terminal
+#' Display Page as Text
+#'
+#' Display in the terminal
+#'
+#' @param page
+#'
+#' @return a message to the console
 display_text <- function(page) {
   message(format_text(page))
 }
 
+#' Display Page as HTML
+#'
+#' Display the page in the Viewer pane
+#'
+#' @param page
+#'
 #' @importFrom utils browseURL
-# convert to html and display in the viewer
+#'
+#' @return an HTML page to the Viewer pane
 display_html <- function(page) {
 
   browser <- getOption("viewer")
