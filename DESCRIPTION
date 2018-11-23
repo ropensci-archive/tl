@@ -1,9 +1,14 @@
 Package: tl
-Title: What the Package Does (one line, title case)
+Title: Quick Ref. Guides For R Functions
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.0.0)
+Authors@R: c(
+  person("Nick", "Golding", email = "nick.golding.research@gmail.com", role = "aut"),
+  person("Holly", "Kirk", email = "hollylkirk@gmail.com", role = "aut")
+  person("Mathew", "Ling", email = "m.ling@deakin.edu.au", role="aut"),
+  person("Dan", "Wilson", email = "dan@thedatacollective.com.au", role="aut"))
+Description: An R equivalent for the command line tool "tldr", which provides quick guides to functions. 
+    Contributions from the community are welcome!
+Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
