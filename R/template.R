@@ -60,14 +60,24 @@ create_page <- function (fun, namespace = NULL) {
   # silently find out whether we have the rstudioapi package
   have_rstudioapi <- requireNamespace("rstudioapi", quietly = TRUE)
 
-  if (have_rstudioapi && rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+  testing <-  identical(Sys.getenv("TESTTHAT"), "true")
+
+  # stop the creation of a text file when testing the function
+  if (!interactive() || testing) {
+    message("File created", file)
+  } else {
+
+    # if user is in RStudio, create a .md file im, else open an external text editor
+    if (have_rstudioapi && rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
     rstudioapi::navigateToFile(file)
   } else {
     utils::file.edit(file)
   }
 
+}
 
-  # E.G.
+
+  # example template
   # # packageName::functionName
   #
   # > description
@@ -81,10 +91,8 @@ create_page <- function (fun, namespace = NULL) {
 
 
   # 2. print some brief rules/instructions to the terminal
-
   message("Rules for making a new page:
           1. Keep your description brief
           2. Your whole page cannot be longer than 30 lines")
-
 
 }
