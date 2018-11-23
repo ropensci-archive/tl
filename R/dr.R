@@ -9,6 +9,8 @@
 #'
 #' @export
 #'
+#' @importFrom utils find
+#'
 #' @examples
 #' \dontrun{
 #' # pull up the quick-reference guide for the first function in dplyr
@@ -31,7 +33,7 @@ dr <- function(fun, namespace = NULL) {
   if (namespace == "NULL" & !grepl("::", fun)) {
 
     # try and find the function within the current environment
-    package <- find(fun)[1]
+    package <- utils::find(fun)[1]
 
     if (length(package) < 1) {
 

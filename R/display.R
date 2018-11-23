@@ -2,8 +2,8 @@
 
 #' Display a page, encoded as a length-one character vector
 #'
-#' @param page
-#'
+#' @param page the page to display
+#' @noRd
 #' @return a message to the user in the console or viewer pane depending on
 #'   user options
 display  <- function(page) {
@@ -28,8 +28,8 @@ display  <- function(page) {
 #'
 #' Display in the terminal
 #'
-#' @param page
-#'
+#' @param page the page to display
+#' @noRd
 #' @return a message to the console
 display_text <- function(page) {
   message(format_text(page))
@@ -39,8 +39,8 @@ display_text <- function(page) {
 #'
 #' Display the page in the Viewer pane
 #'
-#' @param page
-#'
+#' @param page the page to display
+#' @noRd
 #' @importFrom utils browseURL
 #'
 #' @return an HTML page to the Viewer pane
@@ -81,7 +81,7 @@ display_html <- function(page) {
 #' Formats the document page output for nice display in the console
 #'
 #' @param page the text stream from the document page
-#'
+#' @noRd
 #' @return a text formatted version of the document page
 format_text <- function(page) {
   tmp <- gsub("`", "  ", page)
