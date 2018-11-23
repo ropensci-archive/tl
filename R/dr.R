@@ -19,33 +19,69 @@
 #' tl::dr("dplyr::first")
 #' tl::dr("first", "dplyr")
 #' }
-dr <- function(fun, namespace = NULL){
+dr <- function(fun, namespace = NULL) {
 
   # deparse the function & namespace
   fun <- deparse(substitute(fun))
   namespace <- deparse(substitute(namespace))
 
-  warn = FALSE
   # if namespace == NULL & !grep("::", fun) search path
+  if (namespace == "NULL" & !grepl("::", fun)) {
+
+    # try and find the function within the current environment
+    package <- find(fun)[1]
+
+    if (length(package) < 1) {
+
+      # stop if the find() returns a 0 length vector
+      stop("Namespace not provided to find the function.
+           Please try supplying a package with the function name.
+           Example: base::grepl")
+
+    } else {
+
+      if (!grepl("package:", package)) {
+
+        # stop if find() returns information about anything other than a package
+        stop(fun, " is not from a valid package in your current environment.
+             Please try supplying a package with the function name.
+             Example: base::grepl")
+
+      }
+
+      f <- fun
+      ns <- gsub("package:", "", package)
+    }
+  }
 
   # If !is.null(namespace) query
-  if(!is.null(namespace)){
+  if (namespace != "NULL") {
+
     f <-  fun
     ns <-  namespace
+
   }
 
   # If fun contains namespace, return from specified namespace
     #if !is.null(namespace) warn
-  if(grepl("::", fun)) {
-    if(!is.null(namespace)) warn = TRUE
+  if (grepl("::", fun)) {
+
     x <- strsplit(fun, "::")[[1]]
     ns <- x[1]
     f <- x[2]
+
+    if (namespace != "NULL") {
+
+      message("Two namespaces have been provided defaulting to ", fun)
+
+    }
   }
 
   # Error -
-  if(!grepl("::", fun) & namespace == "NULL") {
-    stop("No namespace provided")
+  if (is.null(f) & is.null(ns)) {
+    stop("No namespace provided.
+         Please try supplying a package with the function name.
+         Example: base::grepl")
   }
 
   # try to get a page, catching all errors
