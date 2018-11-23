@@ -59,10 +59,9 @@ submit_page <- function (fun, namespace = NULL, location = getwd()) {
   }
 
   # run the checks
-  lints <- lint_page(filepath)
 
-  checks_failed <- !identical(lints,
-                              structure(list(), class = "lints"))
+  checks_failed <- !run_checks(filepath)
+
 
   # if the checks fail
   if (checks_failed) {
@@ -145,3 +144,12 @@ exists_in_repo <- function (thingo) {
   exists
 
 }
+
+run_checks <- function (filepath) {
+
+  lints <- lint_page(filepath)
+
+  identical(lints,
+            structure(list(), class = "lints"))
+}
+
