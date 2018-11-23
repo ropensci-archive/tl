@@ -12,5 +12,6 @@ Imports:
     utils
 Suggests: 
     testthat,
-    rstudioapi
+    rstudioapi,
+    covr
 RoxygenNote: 6.1.1

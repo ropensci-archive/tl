@@ -3,6 +3,8 @@
 tl
 ==
 
+[![Travis build status](https://travis-ci.org/ropenscilabs/tl.svg?branch=master)](https://travis-ci.org/ropenscilabs/tl) [![Codecov test coverage](https://codecov.io/gh/ropenscilabs/tl/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/tl?branch=master)
+
 The goal of tl is to provide an R equivalent to the tldr command line tool, a community-contributed set of quick reference guides for R functions.
 
 Installation
