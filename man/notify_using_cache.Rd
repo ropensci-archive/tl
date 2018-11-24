@@ -10,7 +10,7 @@ notify_using_cache()
 prints a message
 }
 \description{
-Advising the user that they're using a cached version of the documenation.
+Advising the user that they're using a cached version of the documentation.
 }
 \details{
 Let the user know we're using the cache
