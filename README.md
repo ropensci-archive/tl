@@ -28,34 +28,40 @@ Here are some basic examples of how to use tl:
 Use the `dr` function to find a help page
 
 ``` r
-tl:::dr(lm)
-#> stats::lm
-#> 
-#> fits a linear model
-#> 
-#> - fits a linear model of y dependent on x1 and x2  
-#>   m1 <- lm(y ~ x1 + x2)  
-#> 
-#> - fits on data in data frame df  
-#>   m1 <- lm(y ~ x1 + x2, data = df)  
-#> 
-#> - fits model of y on categorical variable xc  
-#>   m1 <- lm(y ~ as.factor(xc), data = df)  
-#> 
-#> - print model  
-#>   summary(m1)
-
-tl::dr(tidyr::gather)
-#> tidyr::gather
-#> 
-#> converts data from wide to long
-#> 
-#> - collapse columns x1 to x5 into 5 rows  
-#>   gather(data, key = "key", value = "value", x1:x5)  
-#> 
-#> - collapse all columns  
-#>   gather(data, key = "key", value = "value")
+tl::dr(lm)
 ```
+
+> ``` r
+> fits a linear model
+>
+> - fits a linear model of y dependent on x1 and x2
+>   m1 <- lm(y ~ x1 + x2)
+>
+> - fits on data in data frame df
+>   m1 <- lm(y ~ x1 + x2, data = df)
+>
+> - fits model of y on categorical variable xc
+>   m1 <- lm(y ~ as.factor(xc), data = df)
+>
+> - print model
+>   summary(m1)
+> ```
+
+``` r
+tl::dr(tidyr::gather)
+```
+
+> ``` r
+> tidyr::gather
+>
+> converts data from wide to long
+>
+> - collapse columns x1 to x5 into 5 rows
+>   gather(data, key = "key", value = "value", x1:x5)
+>
+> - collapse all columns
+>   gather(data, key = "key", value = "value")
+> ```
 
 Page you are looking for does not exist? Use the `create_page` function to make one! Please follow the instructions to keep it brief.
 
@@ -63,7 +69,7 @@ Page you are looking for does not exist? Use the `create_page` function to make 
 tl::create_page(base::system.file)
 ```
 
-Want to submit your new page to the `tl` package? Use the `submit_page` function to get instructions on how to add your help page to `tl`
+Want to submit your new page to the `tl` package? Use the `submit_page` function to get instructions on how to add your help page to `tl`.
 
 ``` r
 tl::submit_page(base::system.file)
