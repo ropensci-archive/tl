@@ -1,4 +1,4 @@
-context("check existing pages")
+context("tl::dr()")
 
 test_that("dr() works with all modes of input", {
 
