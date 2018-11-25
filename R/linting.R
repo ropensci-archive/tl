@@ -72,18 +72,23 @@ title_ns_fun_linter <- function(lines, filename) {
   }
 }
 
-# the third line should be sentence-case text without a full stop, but ending
-# with two spaces and a blank line
-description_line_linter <- function(lines, filename) {
+# the third line should be lower-case text without a full stop
+description_lowercase_linter <- function(lines, filename) {
 
-}
+  desc_line <- lines[3]
 
-# the remainder of the page should be made up of three-line usage blocks
-# each one should have:
-# a line starting "- " and ending "  " (double space)
-# a line starting "`" and ending "`  " (incl. double space)
-# a blank line
-usage_entry_linter <- function(lines, filename) {
+  lower_case <- identical(desc_line, tolower(desc_line))
+
+  no_full_stop <- !grepl("\\.", desc_line)
+
+  valid <- lower_case & no_full_stop
+
+  if (!valid) {
+    lintr::Lint(filename = filename,
+                message = "The description line should be lowercase, with no full stop.",
+                line = desc_line,
+                linter = "description_lowercase")
+  }
 
 }
 
@@ -101,17 +106,107 @@ number_of_lines_linter <- function(lines, filename) {
 
 }
 
+# each line should have fewer than 80 characters
+line_length_linter <- function(lines, filename) {
+
+  n_characters <- nchar(lines)
+  valid <- all(n_characters < 80)
+
+  if (!valid) {
+    lintr::Lint(filename = filename,
+                message = "All lines should be fewer than 80 characters.",
+                linter = "line_length")
+  }
+
+}
+
 # the page should have blank lines on the 2nd, 4th, and then every third line
 blank_lines_linter <- function(lines, filename) {
 
   n_lines <- length(lines)
+
+  header_blank_lines <- c(2L, 4L)
+  usage_blank_lines <- 4L + seq(3L, n_lines - 4L, by = 3L)
+  expected_blank_lines <- c(header_blank_lines, usage_blank_lines)
+
+  blank_lines <- which(lines == "")
+
+  valid <- identical(blank_lines, expected_blank_lines)
+
+  if (!valid) {
+
+    msg <- paste0("The following lines should be blank: ",
+                 paste(expected_blank_lines, collapse = ", "),
+                 ".")
+
+    lintr::Lint(filename = filename,
+                message = msg,
+                linter = "blank_lines")
+  }
+}
+
+
+# the remainder of the page should be made up of three-line usage blocks
+# each one should have:
+# a line starting "- " and ending "  " (double space)
+# a line starting "`" and ending "`  " (incl. double space)
+# a blank line
+usage_entry_linter <- function(lines, filename) {
+
+  n_lines <- length(lines)
+
+  # break the page up into usage blocks
+  usage_lines <- lines[-(1:4)]
+  usage_ids <- rep(1:8, each = 3, length.out = n_lines - 4)
+  usages <- split(usage_lines, usage_ids)
+
+  # lint if any of the usage sections are invalid
+  valid <- TRUE
+
+  for (usage in usages) {
+
+    if (length(usage) == 3) {
+
+      # the name
+      name <- usage[1]
+      # must be lowercase
+      name_lower <- identical(name, tolower(name))
+      # and have a bullet point
+      name_bulleted <- startsWith(name, "- ")
+      name_valid <- name_lower & name_bulleted
+
+      # the code
+      code <- usage[2]
+      # must start and end with backticks
+      code_valid <- startsWith(code, "`") & endsWith(code, "`")
+
+      # the third line must be blank
+      blank <- usage[3]
+      blank_valid <- blank == ""
+
+      usage_valid <- name_valid & code_valid & blank_valid
+
+    } else {
+
+      usage_valid <- FALSE
+
+    }
+
+    if (!usage_valid) {
+      valid <- FALSE
+    }
+
+  }
+
 
 }
 
 # a list of the linters we are going to run on our markdown file
 tl_page_linters <- list(title_hash_linter,
                         title_ns_fun_linter,
-                        description_line_linter,
-                        usage_entry_linter,
-                        number_of_lines_linter)
+                        description_lowercase_linter,
+                        number_of_lines_linter,
+                        line_length_linter,
+                        blank_lines_linter,
+                        usage_entry_linter)
 
