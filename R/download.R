@@ -97,9 +97,8 @@ notify_using_cache <- function () {
     } else {
       days <- " days "
     }
+    msg <- paste0(msg, install_age, days, "ago.\n")
   }
-
-  msg <- paste0(msg, install_age, days, "ago.\n")
 
   # add update instructions
   msg <- paste0(msg,
