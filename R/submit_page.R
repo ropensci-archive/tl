@@ -26,27 +26,24 @@ submit_page <- function (fun, namespace = NULL, location = getwd()) {
   namespace <- gsub("\"|\'", "", namespace)
 
   # If !is.null(namespace) query
-  if(!is.null(namespace)){
+  if (!is.null(namespace)){
     f <-  fun
     ns <-  namespace
   }
 
   # If fun contains namespace, return from specified namespace
   #if !is.null(namespace) warn
-  if(grepl("::", fun)) {
-    if(!is.null(namespace)) warn = TRUE
+  if (grepl("::", fun)) {
+    if (!is.null(namespace)) warn = TRUE
     x <- strsplit(fun, "::")[[1]]
     ns <- x[1]
     f <- x[2]
   }
 
   # Error -
-  if(!grepl("::", fun) & namespace == "NULL") {
+  if (!grepl("::", fun) & namespace == "NULL") {
     stop("No namespace provided")
   }
-
-
-
 
   # get the filepath
   filepath <- file.path(location, ns, paste0(f, ".md"))

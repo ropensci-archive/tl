@@ -145,6 +145,28 @@ blank_lines_linter <- function(lines, filename) {
   }
 }
 
+# the page should finish double spaces on the 5th line, and then every third line
+double_spaces_linter <- function(lines, filename) {
+
+  n_lines <- length(lines)
+
+  usage_title_lines <- 5L + seq(0L, n_lines - 4L, by = 3L)
+
+  check <- sapply(usage_title_lines, function(x) {grepl("  $", lines[x])})
+
+    valid <- ifelse(sum(!check) == 0, TRUE, FALSE)
+
+  if (!valid) {
+
+    msg <- paste0("The following lines should end in double spaces: ",
+                  paste(usage_title_lines[!check], collapse = ", "),
+                  ".")
+
+    lintr::Lint(filename = filename,
+                message = msg,
+                linter = "double_spaces")
+  }
+}
 
 # the remainder of the page should be made up of three-line usage blocks
 # each one should have:
@@ -195,10 +217,7 @@ usage_entry_linter <- function(lines, filename) {
     if (!usage_valid) {
       valid <- FALSE
     }
-
   }
-
-
 }
 
 # a list of the linters we are going to run on our markdown file
@@ -208,5 +227,6 @@ tl_page_linters <- list(title_hash_linter,
                         number_of_lines_linter,
                         line_length_linter,
                         blank_lines_linter,
-                        usage_entry_linter)
+                        usage_entry_linter,
+                        double_spaces_linter)
 
